@@ -1,0 +1,291 @@
+:toc:
+:sectnums:
+:toclevels: 5
+:sectnumlevels: 5
+:showcomments:
+:xrefstyle: short
+:icons: font
+:source-highlighter: coderay
+:tick: &#x2714;
+:pound: &#xA3;
+
+= Python Tutorial
+
+WARNING: This tutorial is for Python 3 - if, for some reason, you need to learn Python 2, you should look elsewhere.
+
+== Hello World
+
+Like BASIC of old, Python uses the print function to write text to the terminal/console:
+
+[source,python]
+----
+print("Hello, World!")
+----
+
+Notes:
+
+* Python is case-sensitive, so `Print("Hello, World!")` does not work.
+* You can use single or double-quotes `Print('Hello, World!') is equally valid.
+* A newline is automatically appended.
+* You can prevent the newline being appended by adding `,end=""`: +
+
+[source,python]
+----
+print("Hello, World!", end="")
+----
++
+You can use any string for `end` and include a newline by using '\r' if you want.
+
+=== stderr
+
+You can write output to the standard error using one of two different methods:
+
+[source,python]
+----
+import sys
+print("Hello, World!", file=sys.stderr)
+sys.stderr.write('Hello')
+----
+
+== Comments
+
+Comments start with a hash `#` character and continue until the end of the line.
+
+== Variables
+
+Variables cannot be declared before use. Just use them!
+
+----
+a = 1
+b = 2.5
+c = 3+4j # complex number type
+α = 3.5
+----
+
+=== Numeric types
+
+There is one integer type `int` which can be arbitrarily large. There is one floating point type: `float`.
+
+There is a complex type - complex literals use `j` rather than `i`: `3+4j`:
+
+----
+a = 3+4j
+print(abs(a))
+print(a.real)
+print(a.imag)
+----
+
+Note that `abs(a)` give the modulus of a complex number.
+
+=== Strings
+
+Strings can use double or single quotes. Use `f` before a string for interpolation (like a `$` in C#).
+
+----
+s1 = 'hello'
+name = 'jim'
+s2 = f'hello {name}'
+----
+
+Strings can be added:
+
+----
+s1 ='hello'
+s2 = s1 + ' world'
+----
+
+and compared:
+
+----
+s1 ='hello'
+s2 = 'world'
+s2 < s1
+s1 == s2
+----
+
+== Maths functions:
+
+----
+import math
+math.log2(1000)
+math.sin(30 * math.pi / 180)
+----
+
+Or if you have long complex expressions and wish to avoid the `math` prefix, use the following:
+
+----
+from math import sin, cos, tan, log2, pi
+a = sin(0.2) + cos(0.3) + tan(0.4) + log2(1000) * pi
+----
+
+Most mathematical functions found in other languages are available but math also includes gamma functions, error functions,
+base 2 logarithm, logarithm of an arbitrary base, factorials and the converters `radians` and `degrees`.
+
+
+== Python operators
+
+Python has most of the operators available in C-like languages with some notable differences:
+
+* Python does not have increment (`++`) and decrement (`--`) operators.
+* Python has an exponentiation operator `**` ("to the power of").
+* Python has a "floor division" operator `//` such that `5.0 // 2.0` is `2`.
+* Python logical operators are spelled `and`, `or` and `not` - **the usual C-like operators `&&`, `||` and `!` are not used**.
+* Python includes the sequence membership operators `in` and `not in`.
+
+
+== Control structures
+
+=== Indenting
+
+Statements are grouped using indenting instead of curly brackets like in other languages.
+
+=== Conditions
+
+Colons are used to **terminate** conditions in Python.
+
+=== `if` statement
+
+----
+a = 33
+b = 34
+
+if a > b:
+    print("a is the biggest")
+----
+
+Note that brackets around the condition are not required and are discouraged.
+
+=== `elif`
+
+`elif` is use instead of the more common `else if` found in some languages.
+
+----
+a = 33
+b = 34
+
+if a > b:
+    print("a is the biggest")
+elif b > a:
+    print("b is the biggest")
+else:
+    print("a and b are the same")
+----
+
+WARNING: Note the colon after `else`.
+
+=== Short `if` and short `else`
+
+A single statement following if may be placed on one line:
+
+----
+if a > b: print("a is the biggest")
+----
+
+A short `else` resembles the ternary operator in C-like languages:
+
+----
+print("A") if a > b else print("=") if a == b else print("B")
+----
+
+
+== Loops
+
+=== `for` loop
+
+----
+primes = [2, 3, 5, 7]
+for prime in primes:
+    print(prime)
+----
+
+=== Range based `for` loop
+
+=== `while` loop
+
+== Collection types
+
+Python directly supports lists, tuples, sets and dictionaries.
+
+=== lists
+
+Lists use square brackets:
+
+----
+mylist = ["apple", "banana", "cherry"]
+print(mylist[1]) # banana
+----
+
+Lists can be indexed with a negative number: `mylist[-1]` means the last item in the list.
+
+You can use a range to extract a sub-list: `[2:5]` means get everything from item 2 to item 5.
+
+----
+thislist = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]
+print(thislist[2:5]) # ['cherry', 'orange', 'kiwi']
+----
+
+=== tuples
+
+Tuples use round brackets:
+
+mytuple = ("apple", "banana", "cherry")
+print(mytuple)
+
+Use `len` to find the number of members of a tuple:
+
+----
+print(len(thistuple))
+----
+
+More examples:
+
+----
+tuple2 = (1, 5, 7, 9, 3)
+tuple3 = (True, False, False)
+----
+
+=== Sets
+
+Sets use *curly brackets*:
+
+----
+myset = {"apple", "banana", "cherry"}
+----
+
+* Sets are **unordered** and never contain duplicates.
+* You cannot use an index into a set.
+* You can get the length of a set with `len`
+* You cannot change an item in a set but you can add new items with `add`: `myset.Add("kiwi")`
+* You can remove an item from a set with `remove`: `myset.remove("apple")`
+* You can add any `iterable` to a set with `update`, for example: +
+----
+thisset = {"apple", "banana", "cherry"}
+mylist = ["kiwi", "orange"]
+
+thisset.update(mylist)
+----
+
+=== Dictionaries
+
+Dictionaries use **curly brackets** like sets do and contain key-value pairs. The difference
+between a set and a dictionary is that the dictionary contains `key-value` pairs - a key-value
+is separate from the value by a **colon**.
+
+----
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+----
+
+WARNING: From Python 3.7, dictionaries are ordered. Before Python 3.7 they were unordered.
+
+* Dictionary items must have a unique key - adding a key-value pair with the same key as a pair already in the
+dictionary will overwrite the first pair.
+* Dictionary length can be obtain with `len(dictionary)`.
+* To test if a key is in a dictionary use the `in` operator. (Python 2 had `has_key` but this has been removed from Python 3).
+* The `keys` method will obtain a list of the dictionary's keys.
+* The `values` method will obtain a list of the dictionary's values.
+* The `get` method retrieves a value for a key from a dictionary but returns `None` if the key does not exist.
+
