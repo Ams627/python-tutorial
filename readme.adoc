@@ -246,7 +246,7 @@ tuple3 = (True, False, False)
 
 === Sets
 
-Sets use *curly brackets*:
+Sets use **curly brackets**:
 
 ----
 myset = {"apple", "banana", "cherry"}
